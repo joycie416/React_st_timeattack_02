@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import PokemonCard from './PokemonCard'
+import { MockContext } from '../context/MockContextProvider'
 
-const PokemonList = ({mock, setMock, selected, setSelected}) => {
+const PokemonList = () => {
+  const {mock} = useContext(MockContext);
+  
   return (
     <CardsContainer>
       {mock.map(card => {
-        return <PokemonCard card={card} setMock={setMock} selected={selected} setSelected={setSelected} key={card.id}/>
+        return <PokemonCard card={card} key={card.id}/>
       })}
     </CardsContainer>
   )
