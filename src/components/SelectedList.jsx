@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import PokemonCard from './PokemonCard'
+import { MockContext } from '../context/MockContextProvider'
 
-const SelectedList = ({ mock, setMock, selected, setSelected }) => {
+const SelectedList = () => {
+  const {selected} = useContext(MockContext)
   const curSelected = [...selected];
   if (curSelected.length < 6) {
     const n = selected.length;
@@ -17,7 +19,7 @@ const SelectedList = ({ mock, setMock, selected, setSelected }) => {
       <h3>My Pokemons</h3>
       <CardsContainer>
         {curSelected.map((card, idx) => {
-          return <PokemonCard card={card} setMock={setMock} selected={selected} setSelected={setSelected} key={`selected${idx}`} />
+          return <PokemonCard card={card} key={`selected${idx}`} />
         })}
       </CardsContainer>
     </>
