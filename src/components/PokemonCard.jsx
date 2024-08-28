@@ -2,12 +2,17 @@ import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { MockContext } from '../context/MockContextProvider';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleSelected } from '../redux/slices/selectedSlice';
+import { editMock } from '../redux/slices/mockSlice';
 
 const PokemonCard = ({ card }) => {
   const { img_url, korean_name, id, isSelcted } = card;
   const navigate = useNavigate();
 
-  const {editMock, selected, handleSelected} = useContext(MockContext);
+  // const {editMock, selected, handleSelected} = useContext(MockContext);
+  const selected = useSelector(state => state.selected);
+  const dispatch = useDispatch();
 
   return (
     <Card onClick={() => {
@@ -22,15 +27,15 @@ const PokemonCard = ({ card }) => {
           if (!isSelcted && selected.length < 6) {
             const newCard = { ...card };
             newCard.isSelcted = !newCard.isSelcted;
-            handleSelected(newCard);
-            editMock(newCard);
+            dispatch(handleSelected(newCard));
+            dispatch(editMock(newCard));
           } else if (!isSelcted && selected.length === 6) {
             alert('최대 6장까지');
           } else {
             const newCard = { ...card };
             newCard.isSelcted = !newCard.isSelcted;
-            handleSelected(newCard);
-            editMock(newCard);
+            dispatch(handleSelected(newCard));
+            dispatch(editMock(newCard));
           }
         }}>{isSelcted ? '해제' : '선택'}</button>)
         : <button>빈칸</button>}
