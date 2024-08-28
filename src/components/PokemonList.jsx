@@ -2,10 +2,11 @@ import React, { useContext } from 'react'
 import styled from 'styled-components'
 import PokemonCard from './PokemonCard'
 import { MockContext } from '../context/MockContextProvider'
+import { useSelector } from 'react-redux'
 
 const PokemonList = () => {
-  const {mock} = useContext(MockContext);
-  
+  const mock = useSelector(state => state.mock);
+
   return (
     <CardsContainer>
       {mock.map(card => {

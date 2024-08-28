@@ -2,9 +2,11 @@ import React, { useContext } from 'react'
 import styled from 'styled-components'
 import PokemonCard from './PokemonCard'
 import { MockContext } from '../context/MockContextProvider'
+import { useSelector } from 'react-redux'
 
 const SelectedList = () => {
-  const {selected} = useContext(MockContext)
+  const selected = useSelector(state => state.selected);
+
   const curSelected = [...selected];
   if (curSelected.length < 6) {
     const n = selected.length;
@@ -12,7 +14,7 @@ const SelectedList = () => {
       curSelected.push({ korean_name: 'empty', id: 0 });
     }
   }
-  console.log('curSelected :', curSelected)
+  // console.log('curSelected :', curSelected)
 
   return (
     <>
